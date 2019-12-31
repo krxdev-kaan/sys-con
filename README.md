@@ -1,5 +1,6 @@
-# sys-con
+# sys-con (LED Version :D)
 
+#### A Modded version of sys-con to add LED Notifications if any controller plugged/unplugged.
 #### A Nintedo Switch sysmodule for third-party controller support. No man-in-the-middle required! 
 ###### \[Switch FW 5.0.0+\]
 
