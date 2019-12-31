@@ -58,3 +58,6 @@ After opening a console inside the project folder, you can type `make sysmodule 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H316ZQV)
 
 If you wish to see added support for more controllers in the future, consider funding my project on Ko-fi!
+
+## Responsibility
+I'm not responsible for anything. Including Dead or Crashing Switches.
