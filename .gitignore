@@ -11,3 +11,4 @@ buildSysmodule/*
 *.zip
 *.xml
 *.png
+*.DS_store
