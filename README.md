@@ -22,9 +22,13 @@ You need to go to `sdmc:/config/sys-con/config_global.ini` and change the value 
 
 
 
-## Install
+## Install Original Sys-Con
 
 Grab the latest zip from the [releases page](https://github.com/cathery/sys-con/releases). Extract it in your SD card and boot/reboot your switch.
+
+## Install This Modded Sys-Con
+
+Same procedure through this [releases page](https://github.com/krxdev-kaan/sys-con/releases).
 
 ## Config
 
@@ -50,7 +54,7 @@ sys-con comes with a config folder located at `sdmc:/config/sys-con/`. It contai
 The sysmodule uses the latest release of [libnx](https://github.com/switchbrew/libnx), grabbed from pacman.
 After opening a console inside the project folder, you can type `make sysmodule -j8` to build a sysmodule nsp file, or `make applet -j8` to build an applet nro file. If no option is provided, it picks sysmodule.
 
-## Support
+## Support the original sys-con developer !
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H316ZQV)
 
 If you wish to see added support for more controllers in the future, consider funding my project on Ko-fi!
