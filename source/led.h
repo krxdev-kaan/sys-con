@@ -1,0 +1,2 @@
+void startLed();
+void shutdownLed();

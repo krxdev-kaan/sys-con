@@ -9,6 +9,7 @@
 #include "SwitchAbstractedPadHandler.h"
 #include "configFile.h"
 #include "SwitchThread.h"
+#include "led.h"
 
 #define APP_VERSION "0.6.0"
 
@@ -51,6 +52,14 @@ Result CallInitHandler(std::unique_ptr<IController> &controllerPtr)
         {
             controllerInterfaces.push_back(std::move(switchHandler));
             WriteToLog("Interface created successfully");
+
+            //PUSH LED FUNCTION RIGHT HERE SINCE A CONTROLLER IS BEING INITIALIZED
+            //IF STATEMENT TO CHECK IF "controllerInterfaces" SIZE IS BIGGER THAN 0 (JUST IN CASE EVEN THO IT'S IMPOSSIBLE THAT IT'S LOWER THAN 1)
+            if(controllerInterfaces.size() > 0) 
+            {
+                startLed();
+            }
+
             return 0;
         }
         else
@@ -340,6 +349,15 @@ Result mainLoop()
                         {
                             WriteToLog("Erasing controller! %i", (*it)->GetController()->GetType());
                             controllerInterfaces.erase(it--);
+
+                            //IF STATEMENT HERE TO CHECK IF "controllerInterfaces" size have gone 0
+                            //IF NOT WE CAN KEEP THE LED ON FOR NOW
+                            //BUT IF IT'S SIZE HAVE GONE 0 WE CAN TURN THE LED OFF
+                            if (controllerInterfaces.size() <= 0)
+                            {
+                                shutdownLed();
+                            }
+
                             WriteToLog("Controller erased!");
                         }
                     }
