@@ -3,8 +3,9 @@
 
 #include <string.h>
 #include <switch.h>
+#include "led.h"
 
-void startLed()
+void startLed(void)
 {
     HidsysNotificationLedPattern pattern;
     memset(&pattern, 0, sizeof(pattern));
@@ -12,12 +13,12 @@ void startLed()
     pattern.baseMiniCycleDuration = 0x8;
     pattern.totalMiniCycles = 0x2;
     pattern.totalFullCycles = 0x0;
-    pattern.startIntensity = 0x2;
+    pattern.startIntensity = 0x1;
 
     pattern.miniCycles[0].ledIntensity = 0xF;
     pattern.miniCycles[0].transitionSteps = 0xF;
     pattern.miniCycles[0].finalStepDuration = 0x0;
-    pattern.miniCycles[1].ledIntensity = 0x2;
+    pattern.miniCycles[1].ledIntensity = 0x1;
     pattern.miniCycles[1].transitionSteps = 0xF;
     pattern.miniCycles[1].finalStepDuration = 0x0;
 
@@ -26,29 +27,32 @@ void startLed()
 
     size_t total_entries = 0;
 
-    Result rc = hidsysGetUniquePadsFromNpad(hidGetHandheldMode() ? CONTROLLER_HANDHELD : CONTROLLER_PLAYER_1, UniquePadIds, 2, &total_entries);
+    Result rc = hidsysGetUniquePadIds(UniquePadIds, 5, &total_entries);
 
     if (R_SUCCEEDED(rc)) 
     {
         for(int i = 0; i < total_entries; i++) 
         {
-            hidsysSetNotificationLedPattern(&pattern, UniquePadIds[i]);
+            rc = hidsysSetNotificationLedPattern(&pattern, UniquePadIds[i]);
         }
     }
 }
 
-void shutdownLed()
+void shutdownLed(void)
 {
     HidsysNotificationLedPattern pattern;
     memset(&pattern, 0, sizeof(pattern));
 
-    u64 UniquePadIds[5];
+    u64 UniquePadIds[5] = {0};
     memset(UniquePadIds, 0, sizeof(UniquePadIds));
 
     size_t total_entries = 0;
 
-    Result rc = hidsysGetUniquePadsFromNpad(hidGetHandheldMode() ? CONTROLLER_HANDHELD : CONTROLLER_PLAYER_1, UniquePadIds, 2, &total_entries);
+    Result rc = hidsysGetUniquePadIds(UniquePadIds, 5, &total_entries);
 
-    for (int i = 0; i < total_entries; i++)
-        hidsysSetNotificationLedPattern(&pattern, UniquePadIds[i]);
+    if (R_SUCCEEDED(rc)) 
+    {
+        for (int i = 0; i < total_entries; i++)
+            hidsysSetNotificationLedPattern(&pattern, UniquePadIds[i]);
+    }
 }

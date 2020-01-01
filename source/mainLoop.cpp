@@ -2,6 +2,7 @@
 #include "mainLoop.h"
 #include <variant>
 #include "log.h"
+#include "led.h"
 
 #include "SwitchUSBDevice.h"
 #include "ControllerHelpers.h"
@@ -9,7 +10,6 @@
 #include "SwitchAbstractedPadHandler.h"
 #include "configFile.h"
 #include "SwitchThread.h"
-#include "led.h"
 
 #define APP_VERSION "0.6.0"
 
@@ -263,6 +263,7 @@ Result errorLoop()
 Result mainLoop()
 {
     WriteToLog("\n\nNew sysmodule session started on version " APP_VERSION);
+    hidsysInitialize();
     Result rc = 0;
 
     UTimer filecheckTimer;
@@ -401,5 +402,6 @@ Result mainLoop()
 
     WriteToLog("Clearing interfaces");
     controllerInterfaces.clear();
+    hidsysExit();
     return rc;
 }
